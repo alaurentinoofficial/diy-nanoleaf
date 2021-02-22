@@ -28,7 +28,7 @@ public:
     }
     void save()
     {
-        this->storage->set(1, 1);
+        this->storage->set(0, 1);
         this->storage->write(1, &this->configs);
     }
     void load()
