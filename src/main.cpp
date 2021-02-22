@@ -96,7 +96,7 @@ void startup_server()
   // Configure HTTP routes
   server.begin();
   server.on("/", HTTP_GET, ColorController::getHome);
-  server.on("/color", HTTP_POST, ColorController::getHome);
+  server.on("/color", HTTP_POST, ColorController::postColor);
   Serial.println("HTTP> Running in :" + String(HTTP_PORT));
 }
 
