@@ -11,21 +11,28 @@ private:
     Configs configs;
 
 public:
-    ConfigManager() {
+    ConfigManager()
+    {
         storage = new Storage(512);
     }
-    bool begin() {
-        if(storage->get(0) == 1) {
+    bool begin()
+    {
+        // Read the first bit to check if is already configured
+        if (storage->get(0) == 1)
+        {
             load();
             return true;
         }
 
         return false;
     }
-    void save() {
+    void save()
+    {
+        this->storage->set(1, 1);
         this->storage->write(1, &this->configs);
     }
-    void load() {
+    void load()
+    {
         this->storage->read(1, &this->configs);
     }
     Configs &get()

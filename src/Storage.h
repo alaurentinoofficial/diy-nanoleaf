@@ -14,6 +14,11 @@ public:
         this->size = size;
     };
 
+    void set(int address, uint8_t value)
+    {
+        EEPROM.write(address, value);
+    }
+
     uint8_t get(int address)
     {
         return EEPROM.read(address);
