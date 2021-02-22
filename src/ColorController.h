@@ -25,7 +25,7 @@ public:
 
     req->configs->get().qtyLeafs = obj["qty_leaf"].as<uint16_t>();
     req->configs->get().qtyLedsPerLeaf = obj["qty_led_per_leaf"].as<uint8_t>();
-    req->configs->get().mode = obj["mode"].as<Modes>();
+    req->configs->get().mode = static_cast<Modes>(obj["mode"].as<uint8_t>());
     req->configs->get().speed = obj["speed"].as<uint8_t>();
 
     req->configs->get().primaryColor.r = obj["primary"][0].as<uint8_t>();
