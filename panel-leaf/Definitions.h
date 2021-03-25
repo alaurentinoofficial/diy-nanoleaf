@@ -13,32 +13,45 @@
 #define CMD_SET_COLOR 0x04
 #define CMD_FADE_COLOR 0x05
 
-struct RequestHeader {
+struct RequestHeader
+{
   char Command;
   char Address;
 };
 
-struct TileAddress {
+struct Event
+{
+  char Command;
+  char *Address;
+  void (*Callback)(RequestHeader *);
+};
+
+struct TileAddress
+{
   char Address;
 };
 
-struct TileAddressResponse {
+struct TileAddressResponse
+{
   char AddressSource;
   char EdgeTrigged;
 };
 
-struct EdgeLevel {
+struct EdgeLevel
+{
   char Edge;
-  bool Status;
+  char Status;
 };
 
-struct RGB {
+struct RGB
+{
   char R;
   char G;
   char B;
 };
 
-struct FadeColor {
+struct FadeColor
+{
   RGB Color;
   unsigned int Time;
 };

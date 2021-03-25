@@ -1,0 +1,7 @@
+{
+    "programmer": "AVR ISP",
+    "board": "arduino:avr:pro",
+    "configuration": "cpu=16MHzatmega328",
+    "port": "COM3",
+    "sketch": "panel-leaf\\panel-leaf.ino"
+}
