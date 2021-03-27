@@ -30,19 +30,42 @@ public:
         hash = new Node<const char*, V>*[MAX_DICT_SIZE] {};
     }
 
-    void add(const char* key, V value)
+    void set(const char* key, V value)
     {
         // Discovery the hash number
         int pos = Dictionary::hashFunction(key);
         Node<const char*, V>* node = this->hash[pos];
         Node<const char*, V>* newNode = new Node<const char*, V>{ key, value };
 
-        // Append at first position [First-In-Last-Out]
-        newNode->next = this->hash[pos];
-        this->hash[pos] = newNode;
+        // Case is the first element append at start
+        if (node == NULL)
+        {
+            this->hash[pos] = newNode;
+            return;
+        }
+
+        // Loop through the colision list
+        while (node)
+        {
+            // Case is the same key update value
+            if (strcmp(node->key, key) == 0)
+            {
+                node->value = value;
+                return;
+            }
+
+            // Case ends the linked list append at final
+            else if (node->next == NULL)
+            {
+                node->next = newNode;
+                return;
+            }
+
+            node = node->next; // Call the next node
+        }
     }
 
-    V get(const char* key)
+    V& get(const char* key)
     {
         // Discovery the hash number
         int pos = Dictionary::hashFunction(key);
@@ -59,6 +82,11 @@ public:
         }
 
         return *(new V());
+    }
+
+    V& operator[](const char* key)
+    {
+        return this->get(key);
     }
 
     void pop(const char* key)
@@ -92,7 +120,7 @@ public:
     void clear()
     {
         // Dealocate from memory
-        delete hash;
+        delete[] hash;
 
         // Realocate in memory
         hash = new Node<const char*, V>*[MAX_DICT_SIZE] {};

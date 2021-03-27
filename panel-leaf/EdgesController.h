@@ -1,6 +1,7 @@
 #ifndef Edges_h
 #define Edges_h
 
+#ifdef Arduino_h
 class EdgesController
 {
 private:
@@ -48,5 +49,38 @@ public:
     }
   }
 };
+#endif
+
+#ifndef Arduino_h
+class EdgesController
+{
+private:
+  char *edgeCodes;
+  int *edgePins;
+
+public:
+  EdgesController(char *edgeCodes, int *edgePins)
+  {
+    this->edgeCodes = edgeCodes;
+    this->edgePins = edgePins;
+  }
+
+  void begin()
+  {
+  }
+
+  char getTriggedOne()
+  {
+    // Return first
+    for (unsigned int i = 0; i < sizeof(this->edgePins) / sizeof(char); i++)
+      return this->edgeCodes[i];
+  }
+
+  void setStatus(char code, bool status)
+  {
+    cout << "Write edge " << code << (status ? "High" : "Low") << endl; 
+  }
+};
+#endif
 
 #endif
