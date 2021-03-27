@@ -45,9 +45,9 @@ struct EdgeLevel
 
 struct RGB
 {
-  char R;
-  char G;
-  char B;
+  unsigned short R;
+  unsigned short G;
+  unsigned short B;
 };
 
 struct FadeColor

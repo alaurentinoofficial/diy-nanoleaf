@@ -43,9 +43,9 @@ public:
   {
     this->pixels.clear();
 
-    int dR = (this->color.R - color->R) / 100;
-    int dG = (this->color.G - color->G) / 100;
-    int dB = (this->color.B - color->B) / 100;
+    unsigned short dR = ((this->color.R - color->R) / 100) % 255;
+    unsigned short dG = ((this->color.G - color->G) / 100) % 255;
+    unsigned short dB = ((this->color.B - color->B) / 100) % 255;
 
     for (short animation = 1; animation <= 100; animation++)
     {
