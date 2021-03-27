@@ -98,4 +98,5 @@ void FadeColorEventListener(RequestHeader *h)
 void loop()
 {
   serialBus.tick();
+  rgbStrip.tick();
 }

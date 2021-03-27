@@ -1,3 +1,4 @@
+#include "Definitions.h"
 #include <Adafruit_NeoPixel.h>
 
 #ifndef RGBStripController_h
@@ -55,6 +56,8 @@ public:
       delay(delayTime / 100);
     }
   }
+
+  void tick() {}
 };
 
 #endif

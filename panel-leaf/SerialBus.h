@@ -5,10 +5,13 @@
 #ifndef SerialBus_h
 #define SerialBus_h
 
+
+typedef void(*serialbus_handler_t)(RequestHeader*);
+
 class SerialBus
 {
 private:
-  Dictionary<void(*)(RequestHeader *)> events;
+  Dictionary<serialbus_handler_t> events;
 
 public:
   // Compose the command and addresss as a single key to trigger the event
@@ -26,7 +29,7 @@ public:
     this->events.clear();
   }
 
-  void registerEvent(char cmd, char address, void (*cb)(RequestHeader *))
+  void registerEvent(char cmd, char address, serialbus_handler_t cb)
   {
     this->events.set(this->getKey(cmd, address), cb);
   }
