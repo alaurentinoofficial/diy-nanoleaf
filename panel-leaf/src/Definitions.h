@@ -1,6 +1,8 @@
 #ifndef Definitions_h
 #define Definitions_h
 
+#define NONE 0x00
+
 #define SERIAL_RATE 115200
 
 #define CHANNEL_ADDRESS 0x00

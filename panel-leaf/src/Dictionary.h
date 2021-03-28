@@ -132,7 +132,7 @@ public:
         unsigned char c;
 
         // Interrate over the key
-        while (c = *key++)
+        while ((c = *key++))
         {
             // Sum the hash
             hash = ((hash << 5) / 3) + hash + c;

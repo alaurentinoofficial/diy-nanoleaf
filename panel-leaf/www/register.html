@@ -1,0 +1,284 @@
+<html>
+
+<head>
+    <title>RGB</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .main-wrapper {
+            display: flex;
+        }
+
+        section {
+            height: auto;
+            width: 500px;
+            margin: auto;
+            color: #fff;
+            padding: 10px;
+            display: none;
+        }
+
+        section.active {
+            display: inline-block !important;
+        }
+
+        .split {
+            padding-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.048);
+        }
+
+        section .section-title {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .section-body {
+            display: block;
+            margin: 10px 0;
+
+        }
+
+        .section-input-group .title {
+            font-size: 15px;
+            font-weight: 700;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .section-input-group input {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.795);
+            border: 2px solid rgba(0, 0, 0, 0.897);
+            border-radius: 4px;
+            height: 40px;
+            padding: 0 15px;
+            color: #fff;
+        }
+
+        .section-input-group input:focus {
+            outline: none;
+            border-color: #00d897;
+        }
+
+        #blue-theme .section-input-group input:focus {
+            border-color: #007ec7;
+        }
+
+        .list {
+            margin: 10px -10px;
+            padding: 0 10px;
+            list-style: none;
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .list::-webkit-scrollbar {
+            width: 7px;
+            border: none;
+            border: none;
+        }
+        
+        .list::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0.267);
+            border-radius: 300px;
+        }
+        
+        .list::-webkit-scrollbar-thumb {
+            background-color: #009e6f;
+            border-radius: 300px;
+        }
+
+        #blue-theme .list::-webkit-scrollbar-thumb {
+            background-color: #007ec7;
+        }
+
+        .list .list-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 15px 10px;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .list .list-item:hover {
+            background-color: #009e6f;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 20px;
+            margin: 15px 0;
+            width: 200px;
+            color: #fff;
+            background-color: #009e6f;
+            border: none;
+            border-bottom: 8px solid #057050;
+            /* border-radius: 6px; */
+            transition: all 0.3s;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        #blue-theme .btn {
+            background-color: #007ec7;
+            border-bottom: 8px solid #00639c;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+            background-color: #057050;
+            margin-top: 24px;
+            border-bottom: 1px solid transparent;
+        }
+
+        #blue-theme .btn:hover {
+            background-color: #00639c;
+        }
+
+        .btn-back,
+        #blue-theme .btn-back {
+            background-color: #e97100;
+            border-color: #ad5400;
+        }
+
+        .btn-back:hover,
+        #blue-theme .btn-back:hover {
+            background-color: #ad5400;
+            border-color: #ad5400;
+        }
+
+        .section-submit {
+            margin-top: 40px;
+            height: 90px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .full {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <section id="section-register section-register-wifi" class="active">
+            <span class="section-title">WiFi</span>
+
+            <div class="section-body">
+                <div class="section-input-group">
+                    <span class="title">Near WiFi</span>
+                    <ul id="wifi-list" class="list"></ul>
+                </div>
+                <div class="split"></div>
+                <div class="section-input-group">
+                    <span class="title">SSID</span>
+                    <input type="text" id="ssid" name="ssid" value="" placeholder="SSID"/>
+                </div>
+                <div class="section-input-group">
+                    <span class="title">Password</span>
+                    <input type="password" id="password" name="password" value="" placeholder="Password"/>
+                </div>
+            </div>
+
+            <div class="section-submit">
+                <button type="submit" class="btn btn-submit full">Next</button>
+            </div>
+        </section>
+        <section id="section-register section-register-leds">
+            <span class="section-title">Leds</span>
+
+            <div class="split"></div>
+
+            <div class="section-body">
+                <div class="section-input-group">
+                    <span class="title">Device name</span>
+                    <input type="text" id="device-name" name="device-name" value="" placeholder="Device name"/>
+                </div>
+
+                <div class="split"></div>
+
+                <div class="section-input-group">
+                    <span class="title">Leds per Leaf</span>
+                    <input type="number" id="leds-per-leaf" name="leds-per-leaf" value="18" placeholder="Leds per Leaf"/>
+                </div>
+
+                <div class="split"></div>
+                
+                <div class="section-input-group">
+                    <span class="title">Quantity of Leafs</span>
+                    <input type="number" id="qty-leafs" name="qty-leafs" value="6" placeholder="Quantity of leafs"/>
+                </div>
+            </div>
+
+            <div class="section-submit">
+                <button type="" class="btn btn-submit btn-back">Back</button>
+                <button type="submit" class="btn btn-submit">Next</button>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+
+    function newWifiItem(ssid, quality, callback) {
+        var item = document.createElement("li");
+        item.className = "list-item";
+        item.setAttribute("ssid-name", ssid);
+        item.onclick = callback
+        item.innerHTML = `<div>${ssid}</div><div>${quality}% <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQflAhwXAQNzKU7YAAAA8klEQVQoz5XRvS6DARTG8fO21aSJj64Vixtg6SAqsYmEiF3U3AX3IMJAIm5A4gJMRkbGDkRCewGNkaQ+Kt6fQUIbKvEfz/OcJznPifgfsrK/CyWbzrW8e9dyZkPpWxyyq403dadO1b2hbcdgRBh3hTtVxa+VojUNXBkPTaktOVnz9p04sWdOxoBtqWaoWYgw60Y312YiLKp9Ri7reHagrKCg7NCLV0sREZmIiBiL25hONuMpqrEa7WQ9KtGIsd5D846lIHUk/7OJCi6sWHGJqZ+GxISMUSUZk5Lf+xzx6MFw9yzX4+jEfaTR+etZSZ/w/nwA506yLeUsiWMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMDItMjhUMjM6MDE6MDMrMDA6MDBKodKLAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTAyLTI4VDIzOjAxOjAzKzAwOjAwO/xqNwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII="/></div>`;
+        return item;
+    }
+
+    window.onload = function () {
+        var sections = document.querySelector("#section-register");
+        var wifiListComponent = document.querySelector("#wifi-list");
+        var wifiSSIDComponent = document.querySelector("#ssid");
+
+
+
+        var networks = [
+            { ssid: "Network A", quality: 100 },
+            { ssid: "Network B", quality: 80 },
+            { ssid: "Network C", quality: 90 },
+            { ssid: "Network D", quality: 50 },
+            { ssid: "Network E", quality: 60 },
+            { ssid: "Network F", quality: 98 },
+            { ssid: "Network G", quality: 98 },
+            { ssid: "Network H", quality: 2 },
+            { ssid: "Network I", quality: 1 },
+            { ssid: "Network J", quality: 20 },
+            { ssid: "Network K", quality: 60 },
+            { ssid: "Network L", quality: 80 },
+            { ssid: "Network M", quality: 90 },
+            { ssid: "Network N", quality: 100 },
+        ];
+
+        networks.sort(function(a,b) {
+            return b.quality-a.quality
+        });
+
+        var onClickWifiItem = function(event) {
+            event.preventDefault();
+            wifiSSIDComponent.value = this.getAttribute("ssid-name");
+        };
+
+        wifiListComponent.innerHTML = "";
+        networks.forEach(function(net) {
+            wifiListComponent.appendChild(newWifiItem(net.ssid, net.quality, onClickWifiItem));
+        });
+    };
+</script>
+
+</html>

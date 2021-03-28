@@ -20,7 +20,7 @@ public:
     this->pixels = Adafruit_NeoPixel(qtyLeds, pin, NEO_GRB + NEO_KHZ800);
 
     this->color = RGB{0, 0, 0};
-    this->fadeColor(&RGB{255, 255, 255}, 10);
+    this->fadeColor(RGB{255, 255, 255}, 10);
   }
 
   void begin()
@@ -28,9 +28,9 @@ public:
     pinMode(this->pin, OUTPUT);
   }
 
-  void setColor(RGB *color)
+  void setColor(RGB color)
   {
-    this->color = *color;
+    this->color = color;
     this->pixels.clear();
 
     for (int i = 0; i < (this->qtyLeds); i++)
@@ -39,18 +39,21 @@ public:
     this->pixels.show();
   }
 
-  void fadeColor(RGB *color, unsigned int delayTime)
+  void fadeColor(RGB color, unsigned int delayTime)
   {
     this->pixels.clear();
 
-    unsigned short dR = ((this->color.R - color->R) / 100) % 255;
-    unsigned short dG = ((this->color.G - color->G) / 100) % 255;
-    unsigned short dB = ((this->color.B - color->B) / 100) % 255;
+    unsigned short dR = (this->color.R - color.R) / 100;
+    unsigned short dG = (this->color.G - color.G) / 100;
+    unsigned short dB = (this->color.B - color.B) / 100;
 
-    for (short animation = 1; animation <= 100; animation++)
+    for (unsigned short animation = 1; animation <= 100; animation++)
     {
-      setColor(new RGB{
-          this->color.R + dR * animation, this->color.G + dG * animation, this->color.B + dB * animation});
+      setColor(RGB{
+        (unsigned short)((this->color.R + dR * animation) % 255),
+        (unsigned short)((this->color.G + dG * animation) % 255),
+        (unsigned short)((this->color.B + dB * animation) % 255)
+      });
 
       this->pixels.show();
       delay(delayTime / 100);

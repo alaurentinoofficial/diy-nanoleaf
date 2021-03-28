@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "Definitions.h"
 #include "EdgesController.h"
 #include "RGBStripController.h"
@@ -7,12 +8,12 @@
 #define RGB_STRIP_PIN 5
 #define RGB_STRIP_QTY_LEDS 18
 
-char ADDRESS = NULL;
+char ADDRESS = NONE;
 char EDGES_CODES[3] = {0x01, 0x02, 0x03};
 int EDGES_PINS[3] = {2, 3, 4};
 
 // Instantiate controllers
-SerialBus serialBus;
+SerialBus serialBus(SERIAL_RATE);
 EdgesController edges(EDGES_CODES, EDGES_PINS);
 RGBStripController rgbStrip(RGB_STRIP_PIN, RGB_STRIP_QTY_LEDS);
 
@@ -25,7 +26,7 @@ void FadeColorEventListener(RequestHeader *h);
 
 void setup()
 {
-  SerialBus::begin(SERIAL_RATE);
+  serialBus.begin();
   edges.begin();
   rgbStrip.begin();
 
@@ -47,11 +48,11 @@ void NetworkRegisterEventListener(RequestHeader *h)
   char triggedEdge = edges.getTriggedOne();
 
   // Check if is this tile contains one edge trigged, otherwise it's other tile to be addressed
-  if (triggedEdge != NULL)
+  if (triggedEdge != NONE)
   {
     // Read payload
     TileAddress t;
-    SerialBus::readPayload(&t);
+    serialBus.readPayload(&t);
 
     // Change the address
     ADDRESS = t.Address;
@@ -61,7 +62,7 @@ void NetworkRegisterEventListener(RequestHeader *h)
     TileAddressResponse res = TileAddressResponse{ADDRESS, triggedEdge};
 
     // Send the message to join in network
-    SerialBus::sendCommand(CMD_JOIN_ADDRESS, CHANNEL_ADDRESS, &res);
+    serialBus.sendCommand(CMD_JOIN_ADDRESS, CHANNEL_ADDRESS, &res);
   }
 }
 
@@ -69,7 +70,7 @@ void SetEdgeLevelEventListener(RequestHeader *h)
 {
   // Read payload
   EdgeLevel edgeLevel;
-  SerialBus::readPayload(&edgeLevel);
+  serialBus.readPayload(&edgeLevel);
 
   // Set the level of the edge
   edges.setStatus(edgeLevel.Edge, edgeLevel.Status == 0x01);
@@ -79,20 +80,20 @@ void SetColorEventListener(RequestHeader *h)
 {
   // Read payload
   RGB rgb;
-  SerialBus::readPayload(&rgb);
+  serialBus.readPayload(&rgb);
 
   // Change the RGB strip color
-  rgbStrip.setColor(&rgb);
+  rgbStrip.setColor(rgb);
 }
 
 void FadeColorEventListener(RequestHeader *h)
 {
   // Read payload
   FadeColor fadeColor;
-  SerialBus::readPayload(&fadeColor);
+  serialBus.readPayload(&fadeColor);
 
   // Change the RGB strip color
-  rgbStrip.fadeColor(&fadeColor.Color, fadeColor.Time);
+  rgbStrip.fadeColor(fadeColor.Color, fadeColor.Time);
 }
 
 void loop()
