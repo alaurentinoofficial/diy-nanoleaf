@@ -4,11 +4,11 @@
 class EdgesController
 {
 private:
-  char *edgeCodes;
-  int *edgePins;
+  const char *edgeCodes;
+  const int *edgePins;
 
 public:
-  EdgesController(char *edgeCodes, int *edgePins)
+  EdgesController(const char *edgeCodes, const int *edgePins)
   {
     this->edgeCodes = edgeCodes;
     this->edgePins = edgePins;

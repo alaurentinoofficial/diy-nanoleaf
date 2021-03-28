@@ -1,0 +1,23 @@
+{
+  "name": "PanelLeaf",
+  "keywords": "",
+  "description": "",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "version": "0.0.2",
+  "authors": {
+    "name": "Anderson Laurentino",
+    "url": ""
+  },
+  "frameworks": "*",
+  "platforms": "*",
+  "export": {
+    "include": [
+      "*.[ch]pp",
+      "*.h"
+    ]
+  }
+}

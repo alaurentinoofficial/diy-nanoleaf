@@ -1,16 +1,13 @@
 #include <Arduino.h>
-#include "Definitions.h"
-#include "EdgesController.h"
-#include "RGBStripController.h"
-#include "SerialBus.h"
+#include <PanelLeaf.h>
 
 // Definitions and variables
 #define RGB_STRIP_PIN 5
 #define RGB_STRIP_QTY_LEDS 18
 
 char ADDRESS = NONE;
-char EDGES_CODES[3] = {0x01, 0x02, 0x03};
-int EDGES_PINS[3] = {2, 3, 4};
+const char EDGES_CODES[3] = {0x01, 0x02, 0x03};
+const int EDGES_PINS[3] = {2, 3, 4};
 
 // Instantiate controllers
 SerialBus serialBus(SERIAL_RATE);
@@ -56,7 +53,7 @@ void NetworkRegisterEventListener(RequestHeader *h)
 
     // Change the address
     ADDRESS = t.Address;
-    RegisterEvents();
+    RegisterEvents(); // Update the address in events
 
     // Create a response with actual address and trigged edge
     TileAddressResponse res = TileAddressResponse{ADDRESS, triggedEdge};
